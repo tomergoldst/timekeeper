@@ -1,10 +1,9 @@
 # TimeKeeper
 Alarms scheduling for Android.
 
-Set and receive exact alarms with ease.
-TimeKeeper handle all the work for you including rescheduling the alarms after boot
+Set and receive exact alarms with ease, TimeKeeper handle all the work for you.
 
-**Full Support for Android 8.0 (API level 26)**
+**Support Android 8.0 (API level 26) back to Android 4.0 (API level 14)**
 
 ## Instructions
 
