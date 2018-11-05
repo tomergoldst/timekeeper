@@ -102,14 +102,16 @@ public class CreateAlarmActivity extends AppCompatActivity implements
     }
 
     private void onCreateAlarmClicked() {
-        String actionText = mAlarmUidEdt.getText().toString();
+        String uid = mAlarmUidEdt.getText().toString();
 
-        if (TextUtils.isEmpty(actionText)){
+        if (TextUtils.isEmpty(uid)){
             mAlarmUidEdt.setError("UID cannot be empty");
             return;
         }
 
-        Alarm alarm = new Alarm(actionText, mCalendar.getTime().getTime());
+        long timeInMs =  mCalendar.getTime().getTime();
+
+        Alarm alarm = new Alarm(uid, timeInMs);
         alarm.setPersist(mActionPersistCkb.isChecked());
         TimeKeeper.getInstance().setAlarm(alarm);
         finish();
