@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">TimeKeeper Demo</string>
+    <string name="channel_name">Alarms notifications</string>
+    <string name="channel_description">Receive Notifications alarms</string>
+    <string name="menu_refresh">Refresh</string>
+    <string name="menu_clear">Clear Alarms</string>
+    <string name="menu_remove_persisted">Remove Past Persisted Alarms</string>
+    <string name="create_alarm">Create Alarm</string>
+    <string name="click_on_the_plus_to_add_alarm">Click on the \'+\' to add an alarm</string>
+    <string name="persist">Persist</string>
+    <string name="enter_unique_id">Enter unique id</string>
+    <string name="uid">UID</string>
+    <string name="start_time">Alarm time: %1$s</string>
+    <string name="start_date">Alarm date: %1$s</string>
+    <string name="activity_alarms_description">Here you can see the list of existing alarms.\nClick on any of the alarms to cancel it.\nSee settings for more options.</string>
+    <string name="cancel">Cancel</string>
+    <string name="discard">Discard</string>
+    <string name="cancel_alarm_confirmation_text">Cancel alarm?</string>
+    <string name="set_time">Set time</string>
+    <string name="set_date">Set date</string>
+    <string name="row_alarm_uid">Uid: </string>
+    <string name="row_alarm_time">Time: </string>
+    <string name="row_alarm_persist">Persist: </string>
+    <string name="remove_persisted_alarms_explanation">Click on settings and choose remove past persisted alarms to cancel previous persisted alarms</string>
+</resources>

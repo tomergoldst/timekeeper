@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TimeKeeper</string>
+    <string name="time_keeper_channel_name">TimeKeeper alarms</string>
+    <string name="time_keeper_channel_desc">This channel is used to deliver triggered alarms and should not be disabled! Disable of this channel will cause alarms to malfunction</string>
+  </resources>

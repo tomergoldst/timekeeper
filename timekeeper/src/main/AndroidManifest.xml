@@ -1,0 +1,41 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tomergoldst.timekeeper" >
+
+    <application>
+
+        <receiver
+            android:name="com.tomergoldst.timekeeper.core.WakeOnAlarmReceiver"
+            android:enabled="true"
+            android:exported="false" />
+        <receiver
+            android:name="com.tomergoldst.timekeeper.core.OnBootReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.tomergoldst.timekeeper.core.OnMyPackageReplacedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.tomergoldst.timekeeper.core.StatusReviewAlarmReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
+        <service
+            android:name="com.tomergoldst.timekeeper.core.WakeOnAlarmIntentService"
+            android:exported="false" />
+        <service
+            android:name="com.tomergoldst.timekeeper.core.StatusReviewAlarmJobService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>
