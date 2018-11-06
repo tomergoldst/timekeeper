@@ -3,7 +3,11 @@ Alarms scheduling for Android.
 
 Set and receive exact alarms with ease, TimeKeeper handle all the work for you.
 
-**Support Android 8.0 (API level 26) back to Android 4.0 (API level 14)**
+Support `Android 8.0` (API level 26) back to `Android 4.0` (API level 14)
+
+In order to support exact alarms on `Android 9.0` your app has to be in the foreground at
+any time, this can be achieved by using a foreground service running at all time.
+Otherwise your app will be subject to [App Standby buckets](https://developer.android.com/about/versions/pie/power#buckets)
 
 ## Instructions
 
