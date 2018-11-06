@@ -38,6 +38,10 @@ public final class Client {
     void initialize(final Context context){
         Context appContext = context.getApplicationContext();
 
+        if (BuildConfig.DEBUG) {
+            initDeveloperMode(appContext);
+        }
+
         RepositoryDataSource repository = new Repository(appContext);
         SystemAlarmScheduler systemAlarmScheduler = new SystemAlarmSchedulerImpl(appContext);
 
@@ -51,10 +55,6 @@ public final class Client {
         mAlarmManager.setStatusReviewAlarm();
         // run periodic status review job service
         startReviewAlarmsStatusJobService(appContext);
-
-        if (BuildConfig.DEBUG) {
-            initDeveloperMode(appContext);
-        }
 
         // On every call to initialize reset system alarms is status review alarm is not set
         if (!mAlarmManager.isStatusReviewAlarmSet()) {
