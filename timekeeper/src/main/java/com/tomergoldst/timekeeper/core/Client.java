@@ -56,8 +56,10 @@ public final class Client {
             initDeveloperMode(appContext);
         }
 
-        // On every call to initialize reset system alarms
-        mAlarmManager.resetSystemAlarms();
+        // On every call to initialize reset system alarms is status review alarm is not set
+        if (!mAlarmManager.isStatusReviewAlarmSet()) {
+            mAlarmManager.resetSystemAlarms();
+        }
 
     }
 
