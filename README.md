@@ -10,7 +10,7 @@ Set and receive exact alarms with ease, TimeKeeper handle all the work for you.
 Add a dependency to your app build.gradle
 ```groovy
 dependencies {
-    compile 'XXXXXXXX-XXXXXXXXXX-XXXXXXXXXX'
+    compile 'com.tomergoldst.android:timekeeper:1.0.0'
 }
 ```
 
@@ -44,7 +44,7 @@ Add receiver to your manifest. It is important to define the intent-filter with 
 </receiver>
 ```
 
-Init TimeKeeper (Best place to initialize is at your application class)
+Init TimeKeeper, Best place to initialize is at your application class onCreate()
 ```java
 TimeKeeper.initialize(this);
 ```
