@@ -1,8 +1,13 @@
 package com.tomergoldst.timekeeper.tools;
 
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.util.LongSparseArray;
 
+import com.tomergoldst.timekeeper.core.Config;
+import com.tomergoldst.timekeeper.core.WakeOnAlarmReceiver;
 import com.tomergoldst.timekeeper.model.TimePoint;
 
 import java.util.ArrayList;
@@ -29,6 +34,20 @@ public class TimePointsTools {
         for (int i = 0, N = sparseArray.size(); i < N ; i++)
             arrayList.add(sparseArray.valueAt(i));
         return arrayList;
+    }
+
+    public static PendingIntent getPendingIntent(Context context, TimePoint timePoint){
+        Intent intent = new Intent(context, WakeOnAlarmReceiver.class);
+        intent.setAction(timePoint.getActionIdentifierSignature());
+        intent.putExtra(TimePoint.PARAM_TIME_POINT_SIGNATURE, timePoint.getTime());
+        return PendingIntent.getBroadcast(context, Config.REQUEST_CODE_WAKE_ON_ALARM, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+    public static PendingIntent getNoCreatePendingIntent(Context context, TimePoint timePoint){
+        Intent intent = new Intent(context, WakeOnAlarmReceiver.class);
+        intent.setAction(timePoint.getActionIdentifierSignature());
+        intent.putExtra(TimePoint.PARAM_TIME_POINT_SIGNATURE, timePoint.getTime());
+        return PendingIntent.getBroadcast(context, Config.REQUEST_CODE_WAKE_ON_ALARM, intent, PendingIntent.FLAG_NO_CREATE);
     }
 
 }

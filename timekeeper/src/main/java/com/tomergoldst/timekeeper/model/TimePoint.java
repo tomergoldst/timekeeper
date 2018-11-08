@@ -66,27 +66,13 @@ public final class TimePoint implements Parcelable {
         return new Date(time).toString();
     }
 
-    public PendingIntent getPendingIntent(Context context){
-        Intent intent = new Intent(context, WakeOnAlarmReceiver.class);
-        intent.setAction(getActionIdentifierSignature());
-        intent.putExtra(PARAM_TIME_POINT_SIGNATURE, time);
-        return PendingIntent.getBroadcast(context, Config.REQUEST_CODE_WAKE_ON_ALARM, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-    }
-
-    public PendingIntent getNoCreatePendingIntent(Context context){
-        Intent intent = new Intent(context, WakeOnAlarmReceiver.class);
-        intent.setAction(getActionIdentifierSignature());
-        intent.putExtra(PARAM_TIME_POINT_SIGNATURE, time);
-        return PendingIntent.getBroadcast(context, Config.REQUEST_CODE_WAKE_ON_ALARM, intent, PendingIntent.FLAG_NO_CREATE);
-    }
-
     private Calendar getCalendar(){
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date(time));
         return cal;
     }
 
-    private String getActionIdentifierSignature(){
+    public String getActionIdentifierSignature(){
         Calendar cal = getCalendar();
         return "timepoint-"
                 + cal.get(Calendar.YEAR)

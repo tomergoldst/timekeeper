@@ -10,6 +10,7 @@ import android.text.format.DateUtils;
 
 import com.tomergoldst.timekeeper.model.TimePoint;
 import com.tomergoldst.timekeeper.tools.Logger;
+import com.tomergoldst.timekeeper.tools.TimePointsTools;
 
 import java.util.Date;
 
@@ -29,13 +30,13 @@ public final class SystemAlarmSchedulerImpl implements SystemAlarmScheduler {
         assert alarmManager != null;
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            alarmManager.set(AlarmManager.RTC_WAKEUP, timePoint.getTime(), timePoint.getPendingIntent(mContext));
+            alarmManager.set(AlarmManager.RTC_WAKEUP, timePoint.getTime(), TimePointsTools.getPendingIntent(mContext, timePoint));
             Logger.d(TAG, "Set system alarm to " + timePoint.getReadableDate());
         } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timePoint.getTime(), timePoint.getPendingIntent(mContext));
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timePoint.getTime(),  TimePointsTools.getPendingIntent(mContext, timePoint));
             Logger.d(TAG, "Set system alarm to " + timePoint.getReadableDate());
         } else {
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timePoint.getTime(), timePoint.getPendingIntent(mContext));
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timePoint.getTime(),  TimePointsTools.getPendingIntent(mContext, timePoint));
             Logger.d(TAG, "Set system alarm to " + timePoint.getReadableDate());
         }
 
@@ -45,12 +46,12 @@ public final class SystemAlarmSchedulerImpl implements SystemAlarmScheduler {
     public void cancelAlarm(@NonNull TimePoint timePoint) {
         AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         assert alarmManager != null;
-        alarmManager.cancel(timePoint.getPendingIntent(mContext));
+        alarmManager.cancel(TimePointsTools.getPendingIntent(mContext, timePoint));
     }
 
     @Override
     public boolean isAlarmSet(@NonNull TimePoint timePoint) {
-        return timePoint.getNoCreatePendingIntent(mContext) != null;
+        return TimePointsTools.getNoCreatePendingIntent(mContext, timePoint) != null;
     }
 
     @Override
