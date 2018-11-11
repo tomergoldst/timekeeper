@@ -12,10 +12,17 @@ and alarms may be deferred by few minutes or more according to [Power management
 
 ## Instructions
 
-Add a dependency to your app build.gradle
+Add dependencies to your app build.gradle (This library uses both Room and Firebase Job Dispatcher)
 ```groovy
 dependencies {
+    // TimeKeeper
     compile 'com.tomergoldst.android:timekeeper:1.0.0'
+
+     // Room
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+
+    // Firebase Job Dispatcher
+    implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
 }
 ```
 
@@ -49,7 +56,7 @@ Add receiver to your manifest. It is important to define the intent-filter with 
 </receiver>
 ```
 
-Init TimeKeeper, Best place to initialize is at your application class onCreate()
+Init TimeKeeper at your application class onCreate()
 ```java
 TimeKeeper.initialize(this);
 ```
