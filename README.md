@@ -18,7 +18,7 @@ dependencies {
     // TimeKeeper
     compile 'com.tomergoldst.android:timekeeper:1.0.0'
 
-     // Room
+    // Room
     implementation "android.arch.persistence.room:runtime:1.1.1"
 
     // Firebase Job Dispatcher
