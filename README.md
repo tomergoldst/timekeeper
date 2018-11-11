@@ -16,7 +16,7 @@ Add dependencies to your app build.gradle (This library uses both Room and Fireb
 ```groovy
 dependencies {
     // TimeKeeper
-    compile 'com.tomergoldst.android:timekeeper:1.0.0'
+    implementation 'com.tomergoldst.android:timekeeper:1.0.0'
 
     // Room
     implementation "android.arch.persistence.room:runtime:1.1.1"
