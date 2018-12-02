@@ -17,7 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-@Entity(tableName = "timepoint")
+@Entity(tableName = "time_point")
 public final class TimePoint implements Parcelable {
 
     /** Tag used on log messages.*/

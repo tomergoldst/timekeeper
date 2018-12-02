@@ -1,6 +1,8 @@
 package com.tomergoldst.timekeeper.model;
 
 import android.content.Context;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.tomergoldst.timekeeper.tools.Logger;
 
@@ -14,14 +16,28 @@ public final class Repository implements RepositoryDataSource {
 
     private static final String TAG = Repository.class.getSimpleName();
 
-    private DatabaseAccessPoint db;
+    // Database fields
+    private SQLiteDatabase database;
+    private DatabaseHelper dbHelper;
     private AlarmDao mAlarmDao;
     private TimePointDao mTimePointDao;
 
     public Repository(Context context){
-        db = DatabaseAccessPoint.getDatabase(context.getApplicationContext());
-        mAlarmDao = db.alarmDao();
-        mTimePointDao = db.timePointDao();
+        dbHelper = new DatabaseHelper(context);
+        open();
+        mAlarmDao = new AlarmDao(database);
+        mTimePointDao = new TimePointDao(database);
+
+    }
+
+    // Open connection to database
+    private void open() throws SQLException {
+        database = dbHelper.getWritableDatabase();
+    }
+
+    // Close connection to database
+    void close() {
+        dbHelper.close();
     }
 
     /**
@@ -68,7 +84,7 @@ public final class Repository implements RepositoryDataSource {
     }
 
     @Override
-    public Alarm getAlarm(long id) {
+    public synchronized Alarm getAlarm(long id) {
         return mAlarmDao.get(id);
     }
 
@@ -89,7 +105,7 @@ public final class Repository implements RepositoryDataSource {
     }
 
     @Override
-    public List<Alarm> getAllAlarms() {
+    public synchronized List<Alarm> getAllAlarms() {
         return mAlarmDao.getAll();
     }
 
@@ -120,7 +136,7 @@ public final class Repository implements RepositoryDataSource {
     }
 
     @Override
-    public TimePoint getFirstUpcomingTimePoint() {
+    public synchronized TimePoint getFirstUpcomingTimePoint() {
         List<TimePoint> timePoints = mTimePointDao.getTimePoints(1);
         if (timePoints == null || timePoints.isEmpty()){
             return null;
@@ -166,7 +182,7 @@ public final class Repository implements RepositoryDataSource {
 
     @Override
     public int countTimePoints() {
-        return mTimePointDao.countTimePoints();
+        return (int) mTimePointDao.countTimePoints();
     }
 
     @Override
@@ -180,7 +196,7 @@ public final class Repository implements RepositoryDataSource {
     }
 
     @Override
-    public void deleteAllPersistedAlarms() {
+    public synchronized void deleteAllPersistedAlarms() {
         mAlarmDao.deletePersisted();
     }
 
@@ -200,7 +216,7 @@ public final class Repository implements RepositoryDataSource {
     }
 
     @Override
-    public void clear() {
+    public synchronized void clear() {
         mTimePointDao.deleteAll();
         mAlarmDao.deleteAll();
     }
