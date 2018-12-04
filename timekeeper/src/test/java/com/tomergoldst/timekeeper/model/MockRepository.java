@@ -83,6 +83,18 @@ public class MockRepository implements RepositoryDataSource {
     }
 
     @Override
+    public List<Alarm> getNonPersistedAlarms(TimePoint timePoint) {
+        List<Alarm> alarms = new ArrayList<>();
+        for (Alarm a : mAlarms) {
+            if (a.getTime() == timePoint.getTime() && !a.isPersist()) {
+                alarms.add(a);
+            }
+        }
+
+        return alarms;
+    }
+
+    @Override
     public List<Alarm> getAllAlarms() {
         sortAlarms(mAlarms);
         return mAlarms;
@@ -123,7 +135,7 @@ public class MockRepository implements RepositoryDataSource {
     }
 
     @Override
-    public synchronized List<Alarm> getPersistedAlarmsList(long time) {
+    public synchronized List<Alarm> getPersistedAlarmsUpTo(long time) {
         return null;
     }
 

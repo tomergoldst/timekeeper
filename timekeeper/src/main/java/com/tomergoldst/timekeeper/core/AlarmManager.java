@@ -307,10 +307,8 @@ import java.util.List;
       */
      private void onAlarmReceived(ReceivedAlarmData receivedAlarmData){
          // Delete all alarms received
-         for (Alarm alarm : receivedAlarmData.getAlarms()){
-             if (!alarm.isPersist()){
-                 mRepository.deleteAlarm(alarm);
-             }
+         for (Alarm alarm : receivedAlarmData.getNonPersistedAlarms()){
+             mRepository.deleteAlarm(alarm);
          }
 
          // Delete current timePoint
@@ -335,11 +333,11 @@ import java.util.List;
          }
 
          // Get current timePoint alarms
-         List<Alarm> alarms = mRepository.getAlarms(timePoint);
+         List<Alarm> nonPersistedAlarms = mRepository.getNonPersistedAlarms(timePoint);
          // Get persisted alarms - previous alarms
-         List<Alarm> persistAlarms = mRepository.getPersistedAlarmsList(timePoint.getTime());
+         List<Alarm> persistAlarms = mRepository.getPersistedAlarmsUpTo(timePoint.getTime());
          // Create processed alarm data
-         ReceivedAlarmData receivedAlarmData = new ReceivedAlarmData(timePoint, alarms, persistAlarms);
+         ReceivedAlarmData receivedAlarmData = new ReceivedAlarmData(timePoint, nonPersistedAlarms, persistAlarms);
 
          // update alarms status
          onAlarmReceived(receivedAlarmData);

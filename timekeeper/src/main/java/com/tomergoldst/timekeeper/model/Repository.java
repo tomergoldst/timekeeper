@@ -74,6 +74,11 @@ public final class Repository implements RepositoryDataSource {
     }
 
     @Override
+    public List<Alarm> getNonPersistedAlarms(TimePoint timePoint) {
+        return mAlarmDao.getNonPeristedAlarmsAt(timePoint.getTime());
+    }
+
+    @Override
     public synchronized List<Alarm> getAllAlarms() {
         return mAlarmDao.getAll();
     }
@@ -102,7 +107,7 @@ public final class Repository implements RepositoryDataSource {
     }
 
     @Override
-    public synchronized List<Alarm> getPersistedAlarmsList(long time) {
+    public synchronized List<Alarm> getPersistedAlarmsUpTo(long time) {
         return mAlarmDao.getPersisted(time);
     }
 

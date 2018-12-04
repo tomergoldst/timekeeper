@@ -15,21 +15,21 @@ public class ReceivedAlarmData {
     *  Holds raw alarms as received by reading directly from the repository
     *  this lists of alarms will use for continuing inner work
     */
-    private List<Alarm> mRawAlarms;
+    private List<Alarm> mRawNonPersistedAlarms;
     private List<Alarm> mRawPersistedAlarms;
 
     /**
      * Holds processed alarms after removal of duplications
      * this lists of alarms will use for passing the information to the listening app
      */
-    private List<Alarm> mAlarms;
+    private List<Alarm> mNonPersistedAlarms;
     private List<Alarm> mPersistedAlarms;
 
-    public ReceivedAlarmData(TimePoint timePoint, List<Alarm> alarms, List<Alarm> persistedAlarms) {
+    public ReceivedAlarmData(TimePoint timePoint, List<Alarm> nonPersistedAlarms, List<Alarm> persistedAlarms) {
         this.mTimePoint = timePoint;
-        this.mRawAlarms = alarms;
+        this.mRawNonPersistedAlarms = nonPersistedAlarms;
         this.mRawPersistedAlarms = persistedAlarms;
-        this.mAlarms = alarms == null ? null : AlarmTools.removeDuplicated(alarms);
+        this.mNonPersistedAlarms = nonPersistedAlarms == null ? null : AlarmTools.removeDuplicated(nonPersistedAlarms);
         this.mPersistedAlarms = persistedAlarms == null ? null : AlarmTools.removeDuplicated(persistedAlarms);
     }
 
@@ -37,16 +37,16 @@ public class ReceivedAlarmData {
         return mTimePoint;
     }
 
-    public List<Alarm> getRawAlarms() {
-        return mRawAlarms;
+    public List<Alarm> getRawNonPersistedAlarms() {
+        return mRawNonPersistedAlarms;
     }
 
     public List<Alarm> getRawPersistedAlarms() {
         return mRawPersistedAlarms;
     }
 
-    public List<Alarm> getAlarms() {
-        return mAlarms;
+    public List<Alarm> getNonPersistedAlarms() {
+        return mNonPersistedAlarms;
     }
 
     public List<Alarm> getPersistedAlarms() {

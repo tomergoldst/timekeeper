@@ -24,9 +24,10 @@ public interface RepositoryDataSource {
     Alarm getAlarm(long id);
     List<Alarm> getAlarmsByUid(String uid);
     List<Alarm> getAlarms(TimePoint timePoint);
+    List<Alarm> getNonPersistedAlarms(TimePoint timePoint);
     List<Alarm> getAllAlarms();
     Alarm getFirstUpcomingAlarm(String uid);
-    List<Alarm> getPersistedAlarmsList(long time);
+    List<Alarm> getPersistedAlarmsUpTo(long time);
     long insertAlarm(Alarm alarm);
     void updateAlarm(Alarm alarm);
     void deleteAllPreviousPersistedAlarms();

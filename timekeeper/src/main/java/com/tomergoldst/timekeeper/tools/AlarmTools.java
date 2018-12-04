@@ -1,6 +1,7 @@
 package com.tomergoldst.timekeeper.tools;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.tomergoldst.timekeeper.model.Alarm;
 
@@ -22,5 +23,31 @@ public class AlarmTools {
         }
 
         return unDuplicatedAlarms;
+    }
+
+    @Nullable
+    public static List<Alarm> extractNonPersistedAlarms(@NonNull List<Alarm> alarms){
+        List<Alarm> nonPersistedAlarms = new ArrayList<>();
+
+        for (Alarm alarm : alarms) {
+            if (!alarm.isPersist()) {
+                nonPersistedAlarms.add(alarm);
+            }
+        }
+
+        return nonPersistedAlarms;
+    }
+
+    @Nullable
+    public static List<Alarm> extractPersistedAlarms(@NonNull List<Alarm> alarms){
+        List<Alarm> persistedAlarms = new ArrayList<>();
+
+        for (Alarm alarm : alarms) {
+            if (alarm.isPersist()) {
+                persistedAlarms.add(alarm);
+            }
+        }
+
+        return persistedAlarms;
     }
 }

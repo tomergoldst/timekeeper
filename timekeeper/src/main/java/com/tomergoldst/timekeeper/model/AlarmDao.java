@@ -76,6 +76,36 @@ class AlarmDao {
         return alarmsList;
     }
 
+    List<Alarm> getNonPeristedAlarmsAt(long time) {
+        List<Alarm> alarmsList = new ArrayList<>();
+        Cursor cursor;
+
+        String selection = DatabaseContract.AlarmEntry.COLUMN_ALARM_TIME + " = ?"  +
+                " AND " + DatabaseContract.AlarmEntry.COLUMN_ALARM_PERSIST + " = ?";
+        String selectionArgs[] = {String.valueOf(time), String.valueOf(0)};
+
+        cursor = database.query(DatabaseContract.AlarmEntry.TABLE_NAME,
+                DatabaseContract.getAllAlarmColumns(), selection, selectionArgs, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+
+            long id = cursor.getLong(cursor.getColumnIndex(DatabaseContract.AlarmEntry._ID));
+            String uid = cursor.getString(cursor.getColumnIndex(DatabaseContract.AlarmEntry.COLUMN_ALARM_UID));
+            long date = cursor.getLong(cursor.getColumnIndex(DatabaseContract.AlarmEntry.COLUMN_ALARM_TIME));
+            int persist = cursor.getInt(cursor.getColumnIndex(DatabaseContract.AlarmEntry.COLUMN_ALARM_PERSIST));
+            String tag = cursor.getString(cursor.getColumnIndex(DatabaseContract.AlarmEntry.COLUMN_ALARM_PAYLOAD));
+
+            Alarm alarm = new Alarm(id, uid, date, persist == 1, tag);
+            alarmsList.add(alarm);
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return alarmsList;
+    }
+
     List<Alarm> getAll() {
         List<Alarm> alarmsList = new ArrayList<>();
         Cursor cursor;

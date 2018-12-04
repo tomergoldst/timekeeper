@@ -76,12 +76,11 @@ public final class WakeOnAlarmIntentService extends IntentService {
         // Get timePoint time from intent extras
         long alarmTime = intent.getLongExtra(TimePoint.PARAM_TIME_POINT_SIGNATURE, 0);
 
-        // handle response operation for received timePoint, Including regenerate recurring alarms
-        // RecurringAlarmManger will call the AlarmManger.onAlarmReceived(TimePoint timePoint)
+        // handle response operation for received timePoint
         ReceivedAlarmData receivedAlarmData = TimeKeeper.getInstance().getAlarmManger().processReceivedAlarm(alarmTime);
 
         // Call receiver for client to interact
-        callReceiver(receivedAlarmData.getAlarms(), receivedAlarmData.getPersistedAlarms());
+        callReceiver(receivedAlarmData.getNonPersistedAlarms(), receivedAlarmData.getPersistedAlarms());
     }
 
     private void callReceiver(List<Alarm> alarms, List<Alarm> persistAlarms) {
