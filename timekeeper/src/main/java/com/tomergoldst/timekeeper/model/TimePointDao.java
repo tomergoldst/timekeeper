@@ -12,9 +12,6 @@ import com.tomergoldst.timekeeper.tools.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Tomer on 11/12/2015.
- */
 public class TimePointDao {
 
     /** Tag used on log messages.*/
