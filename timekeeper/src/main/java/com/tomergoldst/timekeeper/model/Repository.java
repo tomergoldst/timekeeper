@@ -38,10 +38,6 @@ public final class Repository implements RepositoryDataSource {
         dbHelper.close();
     }
 
-    /**
-     * Store timePoint to database
-     * @param timePoint timePoint
-     */
     @Override
     public synchronized long insertTimePoint(TimePoint timePoint) {
         long id = mTimePointDao.insert(timePoint);
@@ -49,10 +45,6 @@ public final class Repository implements RepositoryDataSource {
         return id;
     }
 
-    /**
-     * Store alarm to database
-     * @param alarm alarm
-     */
     @Override
     public synchronized long insertAlarm(Alarm alarm) {
         long id = mAlarmDao.insert(alarm);
@@ -60,20 +52,12 @@ public final class Repository implements RepositoryDataSource {
         return id;
     }
 
-    /**
-     * Delete timePoint from database. deleting timePoint will delete all it's alarms
-     * @param timePoint time point
-     */
     @Override
     public synchronized void deleteTimePoint(TimePoint timePoint) {
         mTimePointDao.delete(timePoint);
     }
 
 
-    /**
-     * Delete alarm from database
-     * @param alarm alarm
-     */
     @Override
     public synchronized void deleteAlarm(Alarm alarm) {
         mAlarmDao.delete(alarm);
@@ -84,11 +68,6 @@ public final class Repository implements RepositoryDataSource {
         return mAlarmDao.get(id);
     }
 
-    /**
-     * Get all alarms of an timePoint from database
-     * @param timePoint timePoint
-     * @return list of alarms
-     */
     @Override
     public synchronized List<Alarm> getAlarms(TimePoint timePoint) {
         return mAlarmDao.getAlarmsAt(timePoint.getTime());
@@ -127,21 +106,11 @@ public final class Repository implements RepositoryDataSource {
         return mAlarmDao.getPersisted(time);
     }
 
-    /**
-     * Return alarm from database by time or null if not exist
-     * @param time alarm time
-     * @return alarm
-     */
     @Override
     public synchronized TimePoint getTimePointAt(long time) {
         return mTimePointDao.getTimePointAt(time);
     }
 
-    /**
-     * Return alarm from database by time or null if not exist
-     * @param id id
-     * @return timePoint
-     */
     @Override
     public synchronized TimePoint getTimePointById(long id) {
         return mTimePointDao.getTimePoint(id);
