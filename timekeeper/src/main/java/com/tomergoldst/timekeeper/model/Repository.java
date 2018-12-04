@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.tomergoldst.timekeeper.tools.Logger;
-
 import java.util.List;
 
 /**
@@ -48,7 +46,6 @@ public final class Repository implements RepositoryDataSource {
     public synchronized long insertTimePoint(TimePoint timePoint) {
         long id = mTimePointDao.insert(timePoint);
         timePoint.setId(id);
-        Logger.d(TAG, "timePoint id = " + timePoint.getId());
         return id;
     }
 
@@ -60,7 +57,6 @@ public final class Repository implements RepositoryDataSource {
     public synchronized long insertAlarm(Alarm alarm) {
         long id = mAlarmDao.insert(alarm);
         alarm.setId(id);
-        Logger.d(TAG, "alarm id = " + alarm.getId());
         return id;
     }
 
@@ -95,13 +91,7 @@ public final class Repository implements RepositoryDataSource {
      */
     @Override
     public synchronized List<Alarm> getAlarms(TimePoint timePoint) {
-        List<Alarm> alarms = mAlarmDao.getAlarmsAt(timePoint.getTime());
-        if (alarms != null) {
-            for (Alarm a : alarms) {
-                Logger.d(TAG, "Found alarm = " + a.getUid() + " at database");
-            }
-        }
-        return alarms;
+        return mAlarmDao.getAlarmsAt(timePoint.getTime());
     }
 
     @Override
@@ -111,26 +101,14 @@ public final class Repository implements RepositoryDataSource {
 
     @Override
     public synchronized List<Alarm> getAlarmsByUid(String uid) {
-        List<Alarm> alarms = mAlarmDao.getAlarmsByUid(uid);
-        if (alarms != null) {
-            for (Alarm a : alarms) {
-                Logger.d(TAG, "Found alarm = " + a.getUid() + " at database");
-            }
-        }
-        return alarms;
+        return mAlarmDao.getAlarmsByUid(uid);
     }
 
     @Override
     public synchronized Alarm getFirstUpcomingAlarm(String uid) {
         List<Alarm> alarms = mAlarmDao.getAlarmsByUid(uid, 1);
-        if (alarms != null) {
-            for (Alarm a : alarms) {
-                Logger.d(TAG, "Found alarm = " + a.getUid() + " at database");
-            }
-
-            if (alarms.size() > 0) {
-                return alarms.get(0);
-            }
+        if (alarms != null && alarms.size() > 0) {
+            return alarms.get(0);
         }
         return null;
     }
@@ -146,13 +124,7 @@ public final class Repository implements RepositoryDataSource {
 
     @Override
     public synchronized List<Alarm> getPersistedAlarmsList(long time) {
-        List<Alarm> alarms = mAlarmDao.getPersisted(time);
-        if (alarms != null) {
-            for (Alarm a : alarms) {
-                Logger.d(TAG, "Found persist alarm = " + a.getUid() + "at database");
-            }
-        }
-        return alarms;
+        return mAlarmDao.getPersisted(time);
     }
 
     /**
