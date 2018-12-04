@@ -16,7 +16,7 @@ Add dependencies to your app build.gradle (This library uses Firebase Job Dispat
 ```groovy
 dependencies {
     // TimeKeeper
-    implementation 'com.tomergoldst.android:timekeeper:1.0.1'
+    implementation 'com.tomergoldst.android:timekeeper:1.0.2'
 
     // Firebase Job Dispatcher
     implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
