@@ -62,27 +62,27 @@ Now we can start using the sdk and create an alarm:
 Create an Alarm object and pass in a UID and a time to be triggered in millis and then call setAlarm
 ```java
 Alarm alarm = new Alarm("my-alarm-id", 1541433600000);
-TimeKeeper.getInstance().setAlarm(alarm);
+TimeKeeper.setAlarm(alarm);
 ```
 
 To cancel an alarm:
 ```java
-TimeKeeper.getInstance().cancelAlarm("my-alarm-id");
+TimeKeeper.cancelAlarm("my-alarm-id");
 ```
 
 To see list of all existing alarms:
 ```java
-List<Alarm> alarms = TimeKeeper.getInstance().getAlarms();
+List<Alarm> alarms = TimeKeeper.getAlarms();
 ```
 
 To remove all alarms:
 ```java
-TimeKeeper.getInstance().clear();
+TimeKeeper.clear();
 ```
 
 To get next alarm time:
 ```java
-long time = TimeKeeper.getInstance().getNextAlarmTime();
+long time = TimeKeeper.getNextAlarmTime();
 ```
 
 ### License
