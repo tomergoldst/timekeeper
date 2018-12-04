@@ -12,14 +12,11 @@ and alarms may be deferred by few minutes or more according to [Power management
 
 ## Instructions
 
-Add dependencies to your app build.gradle (This library uses both Room and Firebase Job Dispatcher)
+Add dependencies to your app build.gradle (This library uses Firebase Job Dispatcher)
 ```groovy
 dependencies {
     // TimeKeeper
-    implementation 'com.tomergoldst.android:timekeeper:1.0.0'
-
-    // Room
-    implementation "android.arch.persistence.room:runtime:1.1.1"
+    implementation 'com.tomergoldst.android:timekeeper:1.0.1'
 
     // Firebase Job Dispatcher
     implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
