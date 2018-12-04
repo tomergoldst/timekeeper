@@ -113,7 +113,7 @@ public class CreateAlarmActivity extends AppCompatActivity implements
 
         Alarm alarm = new Alarm(uid, timeInMs);
         alarm.setPersist(mActionPersistCkb.isChecked());
-        TimeKeeper.getInstance().setAlarm(alarm);
+        TimeKeeper.setAlarm(alarm);
         finish();
     }
 

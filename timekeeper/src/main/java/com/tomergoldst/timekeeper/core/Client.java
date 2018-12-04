@@ -113,7 +113,7 @@ public final class Client {
      * @param alarm alarm
      * @return inserted alarm id
      */
-    public long setAlarm(Alarm alarm){
+    long setAlarm(Alarm alarm){
         return mAlarmManager.setAlarm(alarm);
     }
 
@@ -121,15 +121,15 @@ public final class Client {
      * cancel alarm by id
      * @param id alarm id
      */
-    public void cancelAlarm(long id) {
+    void cancelAlarm(long id) {
         mAlarmManager.cancelAlarm(id);
     }
 
     /**
-     * cancel alarm
+     * cancel alarm by uid
      * @param uid alarm uid
      */
-    public void cancelAlarm(String uid) {
+    void cancelAlarm(String uid) {
         mAlarmManager.cancelAlarm(uid);
     }
 
@@ -138,7 +138,7 @@ public final class Client {
      * @param alarmUid alarm uid
      * @return most closest alarm to current time of request
      */
-    public Alarm getNextAlarm(String alarmUid){
+    Alarm getNextAlarm(String alarmUid){
         return mAlarmManager.getNext(alarmUid);
     }
 
@@ -147,7 +147,7 @@ public final class Client {
      * Each time point might be bound to more then one alarm and hence we return a list of the alarms
      * @return most closest alarms to current time of request
      */
-    public List<Alarm> getNextAlarms(){
+    List<Alarm> getNextAlarms(){
         return mAlarmManager.getNext();
     }
 
@@ -163,21 +163,21 @@ public final class Client {
      * Get all alarms
      * @return alarms
      */
-    public List<Alarm> getAlarms(){
+    List<Alarm> getAlarms(){
         return mAlarmManager.getAlarms();
     }
 
     /**
      * Delete all past persisted alarms up to current time
      */
-    public void removePastPersistAlarms(){
+    void removePastPersistAlarms(){
         mAlarmManager.removePastPersistAlarms();
     }
 
     /**
      * cancel all alarms
      */
-    public void clear(){
+    void clear(){
         mAlarmManager.clear();
     }
 

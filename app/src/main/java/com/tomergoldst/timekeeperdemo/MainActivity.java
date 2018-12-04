@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity  implements
     }
 
     private List<Alarm> getAlarms() {
-        return TimeKeeper.getInstance().getAlarms();
+        return TimeKeeper.getAlarms();
     }
 
     @Override
@@ -129,11 +129,11 @@ public class MainActivity extends AppCompatActivity  implements
                 refresh();
                 return true;
             case R.id.menu_clear:
-                TimeKeeper.getInstance().clear();
+                TimeKeeper.clear();
                 refresh();
                 return true;
             case R.id.menu_remove_persisted:
-                TimeKeeper.getInstance().removePastPersistAlarms();
+                TimeKeeper.removePastPersistAlarms();
                 refresh();
                 return true;
         }
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity  implements
     @Override
     public void onPositiveDecision(String tag, Bundle bundle) {
         long alarmId = bundle.getLong(ARG_ALARM_ID);
-        TimeKeeper.getInstance().cancelAlarm(alarmId);
+        TimeKeeper.cancelAlarm(alarmId);
         mSwipeRefreshLayout.setRefreshing(true);
         refresh();
     }
