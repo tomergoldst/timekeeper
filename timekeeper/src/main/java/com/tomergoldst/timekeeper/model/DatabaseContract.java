@@ -10,7 +10,7 @@ public class DatabaseContract {
 
     /* Inner class that defines the table contents */
     static abstract class TimePointEntry implements BaseColumns {
-        static final String TABLE_NAME = "time_point";
+        static final String TABLE_NAME = "timepoint";
         static final String COLUMN_TIME_POINT_TIME = "time";
     }
 
