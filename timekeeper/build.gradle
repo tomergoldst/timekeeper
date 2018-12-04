@@ -61,13 +61,6 @@ dependencies {
     // Firebase Job Dispatcher
     implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
 
-    // Room
-    def room_version = "1.1.1"
-    implementation "android.arch.persistence.room:runtime:$room_version"
-    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
-    // Test helpers
-    testImplementation "android.arch.persistence.room:testing:$room_version"
-
     // Mockito
     testImplementation 'org.mockito:mockito-core:2.8.9'
 

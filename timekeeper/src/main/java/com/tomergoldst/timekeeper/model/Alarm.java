@@ -1,9 +1,5 @@
 package com.tomergoldst.timekeeper.model;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -11,28 +7,21 @@ import android.text.TextUtils;
 
 import java.util.Date;
 
-@Entity(tableName = "alarm")
 public final class Alarm implements Parcelable {
 
     /** Tag used on log messages.*/
     private static final String TAG = Alarm.class.getSimpleName();
 
-    @PrimaryKey(autoGenerate = true)
     private long id;
 
-    @ColumnInfo(name = "uid")
     private String uid;
 
-    @ColumnInfo(name = "time")
     private long time;
 
-    @ColumnInfo(name = "persist")
     private boolean persist;
 
-    @ColumnInfo(name = "payload")
     private String payload;
 
-    @Ignore
     public Alarm(@NonNull String uid, long time){
         if (TextUtils.isEmpty(uid)){
             throw new RuntimeException("Alarm uid must not be null");

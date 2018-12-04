@@ -1,23 +1,12 @@
 package com.tomergoldst.timekeeper.model;
 
-import android.app.PendingIntent;
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.tomergoldst.timekeeper.core.Config;
-import com.tomergoldst.timekeeper.core.WakeOnAlarmReceiver;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-@Entity(tableName = "time_point")
 public final class TimePoint implements Parcelable {
 
     /** Tag used on log messages.*/
@@ -25,13 +14,10 @@ public final class TimePoint implements Parcelable {
 
     public static final String PARAM_TIME_POINT_SIGNATURE = "param_time_point_signature";
 
-    @PrimaryKey(autoGenerate = true)
     private long id;
 
-    @ColumnInfo(name = "time")
     private long time;
 
-    @Ignore
     public TimePoint(long time){
         this.time = time;
     }
