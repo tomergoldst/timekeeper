@@ -40,6 +40,7 @@ public class MyAlarmReceiver extends BroadcastReceiver {
         List<Alarm> alarms = intent.getParcelableArrayListExtra("alarms");
 
     }
+}
 ```
 
 Add receiver to your manifest. It is important to define the intent-filter with the appropriate action name
