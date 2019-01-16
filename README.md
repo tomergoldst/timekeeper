@@ -56,7 +56,15 @@ Add receiver to your manifest. It is important to define the intent-filter with 
 
 Init TimeKeeper at your application class onCreate()
 ```java
-TimeKeeper.initialize(this);
+public class MyApplication extends Application {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        TimeKeeper.initialize(this);
+    }
+}
 ```
 
 Now we can start using the sdk and create an alarm:
